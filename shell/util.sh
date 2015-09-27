@@ -234,3 +234,23 @@ function f_mvn() {
 	
 	popd >> /dev/null 2>&1
 }
+
+function f_ant() {
+	local dir_l="$1"; shift
+	local args_l="$*";
+
+	pushd "${dir_l}" >> /dev/null 2>&1
+
+	echo "ant ${args_l}";
+
+	ant ${args_l}
+
+	local status_l=$?
+	if [ $status_l -ne 0 ];then
+		f_die "FAILED ant command status"
+	else
+		log_info "OK ant command status"
+	fi
+
+	popd >> /dev/null 2>&1
+}
