@@ -10,7 +10,7 @@ function f_rootUserCheck(){
 	# https://github.com/nischithbm/sailfish-logger4sh
 	log_info "Checking whether root user is executing the script"
 	
-	local name_l=`$c_id -un`
+	local name_l=`id -un`
 	local uname_l=`f_uppercase ${name_l}`
 
 	if [ "${uname_l}" != "ROOT" ]; then
