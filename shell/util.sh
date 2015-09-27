@@ -215,3 +215,22 @@ function f_undoEscapeForwardSlash(){
 	local l_var="$1"; shift;
 	echo ${l_var//\\/}
 }
+
+function f_mvn() {
+	local dir_l="$1"; shift
+	local args_l="$*";
+	
+	pushd "${dir_l}" >> /dev/null 2>&1
+	echo "mvn ${args_l}";
+	
+	mvn ${args_l}	
+	
+	local status_l=$?
+	if [ $status_l -ne 0 ];then
+		f_die "FAILED Maven command status"
+	else
+		log_info "OK Maven command status"
+	fi
+	
+	popd >> /dev/null 2>&1
+}
